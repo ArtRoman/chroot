@@ -14,7 +14,6 @@ else
 fi
 iSystem=jessie
 chrootBaseDir=/DataVolume/$chrootDir
-debootstrapPkgName=debootstrap_1.0.48+deb7u4_all.deb
 projectURL=https://github.com/MyBookLive/chroot/raw/master
 isServicesInstalled=no
 WGET="wget --no-check-certificate -q -O"
@@ -46,10 +45,6 @@ then
 else
 	mkdir $chrootBaseDir
 fi
-echo -e $INFO Deploying a debootstrap package...
-$WGET /tmp/$debootstrapPkgName $projectURL/$debootstrapPkgName
-dpkg -i /tmp/$debootstrapPkgName
-rm -f /tmp/$debootstrapPkgName
 echo -e $INFO Preparing a new Debian $iSystem chroot file base. Please, be patient,
 echo -e $INFO may takes a long time on low speed connection...
 debootstrap --no-check-gpg --no-check-certificate --variant=minbase --exclude=yaboot,udev,dbus,systemd --include=locales,mc,aptitude,wget,dialog,apt-utils,sysvinit-core,sysvinit,sysvinit-utils $iSystem $chrootBaseDir ftp://ftp.ru.debian.org/debian
